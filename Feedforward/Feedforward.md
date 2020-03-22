@@ -1,11 +1,11 @@
 # Projectgegevens
-**VOORNAAM NAAM:**  Plaats hier jouw voornaam & naam.
+**VOORNAAM NAAM:** Yerl Deblauwe
 
-**Sparringpartner:** schrijf hier de naam van jouw sparring partner. Deze persoon is jouw klankbord, redder in nood, motivator, partner in crime :-)
+**Sparringpartner:** Ian Remy
 
-**Projectsamenvatting in max 10 woorden:** schrijf hier jouw samenvatting
+**Projectsamenvatting in max 10 woorden:** Een gemakkelijk te onderhouden smart-moestuin.
 
-**Projecttitel:** plaats hier een catchy werktitel van jouw project
+**Projecttitel:** Green Guard
 
 
 # Tips voor feedbackgesprekken
@@ -30,11 +30,11 @@
 
 # Feedforward gesprekken
 
-## Gesprek 1 (Datum: dd/mm/yyyy)
-Lector: 
+## Gesprek 1 (Datum: 11/03/2020)
+Lector: Claudia & Geert
 
 Vragen voor dit gesprek:
-- [x] vraag 1:
+- [x] vraag 1: geen vragen, alles is duidelijk tot nu toe
 - [ ] vraag 2:
 
 Dit is de feedback op mijn vragen. 
@@ -42,8 +42,9 @@ Dit is de feedback op mijn vragen.
 - feedback 2
 
 Hier komt de feedforward: wat ga ik concreet doen?
-- [ ] ToDo 1
-- [ ] ToDo 2
+- [ ] ToDo 1:   Aandachtig luisteren naar wat Claudia & Geert te zeggen hebben over, en verwachten bij mijn project
+                zodat ik nadien meteen kan beginnen met onderdelen bestellen.
+- [ ] ToDo 2:
 
 ## Gesprek 2 (Datum: dd/mm/yyyy)
 Lector: 
