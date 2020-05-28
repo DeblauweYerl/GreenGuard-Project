@@ -44,19 +44,18 @@ Dit is de feedback op mijn vragen.
 Hier komt de feedforward: wat ga ik concreet doen?
 - [ ] ToDo 1:   Aandachtig luisteren naar wat Claudia & Geert te zeggen hebben over, en verwachten bij mijn project
                 zodat ik nadien meteen kan beginnen met onderdelen bestellen.
-- [ ] ToDo 2:
 
-## Gesprek 2 (Datum: dd/mm/yyyy)
-Lector: 
+## Gesprek 2 (Datum: 25/05/2020)
+Lector: Stijn
 
 Vragen voor dit gesprek:
-- [x] vraag 1:
-- [ ] vraag 2:
+- [x] vraag 1: Is het mogelijk dat mijn database maar uit 3 tabellen bestaat?
+- [ ] vraag 2: Moeten de metingen van de sensoren in tblmeasurement een aparte primary key hebben of volstaat de combinatie van DateTime en DeviceId als primary key?
 
 Dit is de feedback op mijn vragen. 
-- feedback 1
-- feedback 2
+- 1: Het is inderdaad mogelijk dat de database maar uit 3 tabellen bestaat.
+- 2: De combinatie van DateTime en DeviceId volstaat
 
 Hier komt de feedforward: wat ga ik concreet doen?
-- [ ] ToDo 1
-- [ ] ToDo 2
+- [ ] ToDo 1: Stijn mijn ERD eens laten zien.
+- [ ] ToDo 2: Mijn vragen stellen.
