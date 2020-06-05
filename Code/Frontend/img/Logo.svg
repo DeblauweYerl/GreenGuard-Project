@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="859" height="164" viewBox="0 0 859 164">
+  <g id="Logo" transform="translate(-1217 -294)">
+    <path id="Leaf" d="M19.587-4.038c.415,2.211,5.859,12.369,0,20.549-4.418,5.025-8.255,4.042-11.184,8.613A12.569,12.569,0,0,0,7.39,30.419c-.011,2.623-.063,7.569-.881,9.591-.47,1.183-.855-.321-1.438-.321-1.846,0-2.547-9.9-1.486-14.958s1.585-2.954,1.486-6.585c-.08-3.057-1.1-1.9-1.406-9.654C4.171-3.368,19.172-6.249,19.587-4.038Z" transform="translate(1778.741 311.416)" fill="#578c06"/>
+    <rect id="Dirt" width="51" height="63" transform="translate(1761 346)" fill="#661a00"/>
+    <text id="GREEN_GUARD" data-name="GREEN GUARD" transform="translate(1217 420)" fill="#578c06" font-size="128" font-family="FuturaPT-Demi, Futura PT" font-weight="300"><tspan x="0" y="0">GREEN G</tspan><tspan y="0" fill="#bd512d">U</tspan><tspan y="0">ARD</tspan></text>
+  </g>
+</svg>

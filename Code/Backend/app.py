@@ -5,6 +5,7 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 
 import time
+import datetime
 import threading
 
 # Code voor sensors en acuators
@@ -32,6 +33,8 @@ temp = 0
 hum = 0
 moist = 0
 light = 0
+water_applied = 0
+irrigation_mode = "auto"
 
 GPIO.setwarnings(False)
 # GPIO.setmode(GPIO.BCM)
@@ -46,29 +49,92 @@ CORS(app)
 #display ip
 def display_ip():
     ips = check_output(['hostname', '--all-ip-addresses'])
-    print(ips)
     arr_ips = str(ips).split()
     LCD.init_LCD()
     LCD.write_message(arr_ips[1].replace("'", "").lstrip("b"))
 
 display_ip()
 
+
+def sensordata():
+    sol = DataRepository.read_latest_solenoid()
+    sol['DateTime'] = str(sol['DateTime'])[11:16]
+    data = {
+        'temp': DataRepository.read_latest_temperature(),
+        'hum': DataRepository.read_latest_humidity(),
+        'moist': DataRepository.read_latest_moisture(),
+        'light': DataRepository.read_latest_light(),
+        'sol': sol
+    }
+    return data
+
+
 #thread
 def read_sensors():
-    global temp, hum, moist, light
+    global temp, hum, moist, light, water_applied, irrigation_mode
     while True:
         print("sensors inlezen")
         hum_raw, temp_raw = Adafruit_DHT.read(DHT_sensor, dht)
         if hum_raw is not None and temp_raw is not None:
             temp = round(temp_raw, 0)
             hum = round(hum_raw, 0)
-        # res = DataRepository.insert_measurement('HUM', 3, humidity, None)
-        # res = DataRepository.insert_measurement('TEMP', 3, temperature, None)
-        moist = abs(round(moist_sensor.read_channel() / 1023 * 100, 0) - 100)
-        # res = DataRepository.insert_measurement('MOIST', 2, moisture, None)
+
+        moist = abs(round((moist_sensor.read_channel()-350) / 673 * 100, 0) - 100)
+
         light = abs(round(LDR.read_channel() / 1023 * 100, 0) - 100)
-        # res = DataRepository.insert_measurement('LIGHT', 1, light, None)
+
+        insert_sensordata()
+        
+        if irrigation_mode == "auto":
+            if moist < 35:
+                res = DataRepository.insert_measurement('SOLA', 4, 1, None)
+                solenoid.apply_water()
+                res = DataRepository.insert_measurement('SOLA', 4, 0, None)
+                water_applied = 1
+            else:
+                water_applied = 0
+
+        check_warnings()
+        
         time.sleep(5)
+
+def insert_sensordata():
+    global temp, hum, moist, light
+    if temp > 30 and light > 95:
+        res = DataRepository.insert_measurement('TEMP', 3, temp, 'HOT')
+    elif temp < 16 and light < 50:
+        res = DataRepository.insert_measurement('TEMP', 3, temp, 'COLD')
+    else:
+        res = DataRepository.insert_measurement('TEMP', 3, temp, None)
+
+    #humidity
+    res = DataRepository.insert_measurement('HUM', 3, hum, None)
+
+    #moisture
+    if DataRepository.read_latest_moisture()['Status'] < 35 and water_applied == 1:
+        res = DataRepository.insert_measurement('MOIST', 2, moist, 'WATER')
+    else:
+        res = DataRepository.insert_measurement('MOIST', 2, moist, None)
+
+    res = DataRepository.insert_measurement('LIGHT', 1, light, None)
+
+def check_warnings():
+    data = sensordata()
+
+    if data['temp']['Warning'] is not None:
+        LCD.init_LCD()
+        LCD.write_message("Waarschuwing:")
+        LCD.second_row()
+        LCD.write_message(data['temp']['Warning'])
+
+    elif data['moist']['Warning'] is not None:
+        LCD.init_LCD()
+        LCD.write_message("Waarschuwing:")
+        LCD.second_row()
+        LCD.write_message(data['moist']['Warning'])
+    
+    else:
+        display_ip()
 
 read_sensors_thread = threading.Thread(target=read_sensors)
 read_sensors_thread.start()
@@ -83,53 +149,42 @@ def hallo():
 @socketio.on('connect')
 def initial_connection():
     print('A new client connect')
-    # # Send to the client!
-    # vraag de status op van de lampen uit de DB
-    # status = DataRepository.read_status_lampen()
-    # socketio.emit('B2F_status_lampen', {'lampen': status})
+    send_measurements(1)
 
 @socketio.on('F2B_request_measurements')
-def send_measurements(data):
-    global temp, hum, moist, light
-    socketio.emit('B2F_received_measurements', {'temp': temp, 'hum': hum, 'moist': moist, 'light': light})
+def send_measurements(payload):
+    data = sensordata()
+    socketio.emit('B2F_received_measurements', data)
+    
+    if data['temp']['Warning'] is not None:
+        socketio.emit('B2F_warning', data['temp']['Warning'])
+
+    elif data['moist']['Warning'] is not None:
+        socketio.emit('B2F_warning', data['moist']['Warning'])
+
+@socketio.on('F2B_request_data')
+def send_data(payload):
+    print(payload)[0]
+    if payload[0] == 'temp':
+        data = DataRepository.read_temperature()
+        data['DateTime'] = str(data['DateTime'])
+        print(data)
+        socketio.emit('B2F_read_data', data)
+
 
 @socketio.on('F2B_activate_solenoid')
-def switch_light(data):
+def activate_solenoid(data):
     print('Solenoid activated')
     res = DataRepository.insert_measurement('SOLM', 4, 1, None)
     solenoid.apply_water()
     res = DataRepository.insert_measurement('SOLM', 4, 0, None)
 
-
-# @socketio.on('F2B_activate_solenoid')
-# def switch_light(data):
-#     print('licht gaat aan/uit')
-#     lamp_id = data['lamp_id']
-#     new_status = data['new_status']
-#     # spreek de hardware aan
-#     # stel de status in op de DB
-#     res = DataRepository.update_status_lamp(lamp_id, new_status)
-#     print(lamp_id)
-#     if lamp_id == "2":
-#         lees_knop(20)
-#     # vraag de (nieuwe) status op van de lamp
-#     data = DataRepository.read_status_lamp_by_id(lamp_id)
-#     socketio.emit('B2F_verandering_lamp', {'lamp': data})
-
-
-# def lees_knop(pin):
-#     print("button pressed")
-#     if GPIO.input(led1) == 1:
-#         GPIO.output(led1, GPIO.LOW)
-#         res = DataRepository.update_status_lamp("2", "0")
-#     else:
-#         GPIO.output(led1, GPIO.HIGH)
-#         res = DataRepository.update_status_lamp("2", "1")
-#     data = DataRepository.read_status_lamp_by_id("2")
-#     socketio.emit('B2F_verandering_lamp', {'lamp': data})
-
-
-# knop1.on_press(lees_knop)
+@socketio.on('F2B_irrigation_mode')
+def switch_irrigation_mode(data):
+    global irrigation_mode
+    irrigation_mode = data
+    print(data)
+    print(irrigation_mode)
 
 
 if __name__ == '__main__':

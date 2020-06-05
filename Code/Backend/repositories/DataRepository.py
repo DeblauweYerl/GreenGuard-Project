@@ -9,29 +9,31 @@ class DataRepository:
             gegevens = request.form.to_dict()
         return gegevens
 
+
     @staticmethod
-    def read_all_devices():
-        sql = "SELECT * FROM tblmeasurement"
+    def read_all_measurements():
+        sql = "SELECT DateTime, ActionId, Status, Warning FROM tblmeasurement"
         return Database.get_rows(sql)
 
     @staticmethod
-    def read_all_sensors():
-        sql = "SELECT * FROM tblmeasurement M JOIN tbldevice D ON M.DeviceId = D.DeviceId WHERE D.Type = 'Sensor'"
+    def read_all_sensordata():
+        sql = "SELECT M.DateTime, M.ActionId, M.Status, M.Warning FROM tblmeasurement M JOIN tbldevice D ON M.DeviceId = D.DeviceId WHERE D.Type = 'Sensor'"
         return Database.get_rows(sql)
+
 
     @staticmethod
     def read_temperature():
-        sql = "SELECT * FROM tblmeasurement WHERE ActionId = 'TEMP'"
+        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'TEMP'"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_humidity():
-        sql = "SELECT * FROM tblmeasurement WHERE ActionId = 'HUM'"
+        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'HUM'"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_moisture():
-        sql = "SELECT * FROM tblmeasurement WHERE ActionId = 'MOIST'"
+        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'MOIST'"
         return Database.get_rows(sql)
 
     @staticmethod
@@ -44,10 +46,32 @@ class DataRepository:
         sql = "SELECT * FROM tblmeasurement WHERE ActionId LIKE 'SOL%'"
         return Database.get_rows(sql)
 
+
     @staticmethod
     def read_latest_temperature():
-        sql = "SELECT * FROM tblmeasurement WHERE ActionId = 'TEMP' ORDER BY DateTime DESC LIMIT 1"
+        sql = "SELECT M.Status, W.Message AS Warning FROM tblmeasurement M LEFT JOIN tblwarning W ON M.Warning = W.WarningId WHERE M.ActionId = 'TEMP' ORDER BY M.DateTime DESC LIMIT 1"
         return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_humidity():
+        sql = "SELECT Status FROM tblmeasurement WHERE ActionId = 'HUM' ORDER BY DateTime DESC LIMIT 1"
+        return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_moisture():
+        sql = "SELECT M.Status, W.Message AS Warning FROM tblmeasurement M LEFT JOIN tblwarning W ON M.Warning = W.WarningId WHERE M.ActionId = 'MOIST' ORDER BY M.DateTime DESC LIMIT 1"
+        return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_light():
+        sql = "SELECT Status FROM tblmeasurement WHERE ActionId = 'LIGHT' ORDER BY DateTime DESC LIMIT 1"
+        return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_solenoid():
+        sql = "SELECT DateTime, Warning FROM tblmeasurement WHERE ActionId LIKE 'SOL%' ORDER BY DateTime DESC LIMIT 1"
+        return Database.get_one_row(sql)
+
 
     @staticmethod
     def insert_measurement(actionId, deviceId, status, warning):

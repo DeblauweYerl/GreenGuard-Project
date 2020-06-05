@@ -2,6 +2,7 @@
   #FONTS
 \*------------------------------------*/
 
+
 /*------------------------------------*\
   #GENERIC
 \*------------------------------------*/
@@ -14,8 +15,9 @@
 
 html {
     font-size: 16px;
+    font-weight: 400;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
+    font-family: "Futura PT", Helvetica, arial, sans-serif;
     color: #20223A;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
@@ -174,19 +176,33 @@ a:focus {
 /* color modifiers */
 
 .o-row--primary-x-dark {
-    color: #FFF;
+    color: #FAFAFA;
     background: #1B6119;
 }
 
 .o-row--neutral-xx-dark {
-    color: #FFF;
-    background: rgb(0, 100, 231);
+    color: #FAFAFA;
+    background: #0476AD;
 }
 
 /* intro */
 
+.o-row--intro {
+    padding-top: 16px;
+    padding-bottom: 64px;
+}
 
 /* size modifiers */
+
+.o-row--thin {
+    padding-left: 16px; 
+    padding-right: 16px; 
+}
+
+.o-row--sm {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
 
 .o-row--lg {
     padding-top: 48px;
@@ -242,7 +258,7 @@ a:focus {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    max-width: 79.5em; /* 90 * 16px = 1440px */
+    max-width: 967px; /* 90 * 16px = 1440px */
 }
 
 /*
@@ -300,11 +316,11 @@ a:focus {
 }
 
 .o-layout--gutter-sm {
-    margin: 0 -6px;
+    margin: 0 -8px;
 }
 
 .o-layout--gutter-sm > .o-layout__item {
-    padding: 0 6px;
+    padding: 0 8px;
 }
 
 .o-layout--gutter-lg {
@@ -459,19 +475,56 @@ a:focus {
     height: 64px;
 }
 
+
 /*
     Components: data
     ---
     Components to style the data tiles.
 */
 
+.c-lead--lg {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.c-lead--xl {
+    font-weight: 500;
+    font-size: 56px;
+}
+
+/*
+    Components: data
+    ---
+    Components to style the data tiles.
+*/
+
+/* elementen positioneren en kleuren */
 .c-data__item {
-    /* border: 2px solid rgb(71, 158, 0); */
-    border-radius: 32px;
-    background: rgb(71, 158, 0);
-    height: 240px;
+    position: relative;
+    /* bottom: 96px;
+    z-index: -10; */
+    border-radius: 16px;
+    background: #578C06;
+    height: 136px; /* =160px */
     text-align: center;
     color: #FFF;
+}
+
+.c-data__data {
+    position: absolute;
+    border-radius: 16px;
+    background: #4D8000;
+    height: 96px;
+    width: 100%;
+    right: 0px;
+}
+
+.c-data__data-value {
+    padding-top: 8px;
+}
+
+.c-data__title {
+    padding-top: 96px;
 }
 
 .c-data > .c-data__item {
@@ -479,23 +532,29 @@ a:focus {
     margin-right: 28px;
 }
 
+.c-data__item--warning {
+    background-color: #BD512D;
+}
+
+.c-data__data--warning {
+    background-color: #A34121;
+}
+
+
 /*
-    Components: button
+    Components: cell
     ---
-    Components to style buttons.
+    Components to style cells of table.
 */
 
-.c-button {
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-content: flex-end;
-    padding: 8px 20px;
-    margin-bottom: 32px;
-    border: 2px solid #FFF;
-    border-radius: 16px;
-    background: rgb(0, 100, 231);
+.c-cell {
+    background-color: #578C06;
+    border: 2px solid #FAFAFA;
+    color: #FAFAFA;
+    padding-left: 8px;
+    width: 176px;
 }
+
 
 /*
     Components: water
@@ -504,12 +563,94 @@ a:focus {
 */
 
 .c-water {
-    margin-bottom: 64px;
+    height: 144px;
+    font-size: 16px;
 }
+
+.c-water__irrigation-mode {
+   text-align: center;
+}
+
+.c-water-apply {
+    display: flex;
+}
+
+
+/*
+    Components: button
+    ---
+    Components to style buttons.
+*/
+
+.c-button {
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 4px;
+    border-radius: 8px;
+}
+
+.c-button--md {
+    padding-top: 2px
+}
+
+.c-button--lg {
+    padding-top: 8px;
+    border-radius: 16px;
+    font-size: 16px;
+    height: 40px;
+}
+
+.c-button--bg-light {
+    border: 2px solid #FAFAFA;
+    background: #0476AD;
+}
+
+.c-button--bg-dark {
+    background: #035680;
+}
+
+.c-button--active {
+    color: #0476AD;
+    background: #FAFAFA;
+}
+
+.c-button:hover {
+    cursor: pointer;
+}
+
+@media(min-width: 768) {
+    .c-button--xl-bp2 {
+        height: 88px;
+    }
+}
+
 
 /*------------------------------------*\
   #UTILITIES
 \*------------------------------------*/
+
+/*
+    Utilities: order
+    ---
+    Utility classes to give elements different flex-orders
+*/
+
+@media(min-width: 768px) {
+
+    .u-order-1-bp2 {
+        order: 1;
+    }
+
+    .u-order-2-bp2 {
+        order: 2;
+    }
+
+    .u-order-3-bp2 {
+        order: 3;
+    }
+
+}
 
 /*
     Utilities: color
@@ -565,12 +706,16 @@ a:focus {
     Utility classes to put specific max widths onto elements
 */
 
+.u-max-width-xxs {
+    max-width: 9.75em !important;
+}
+
 .u-max-width-xs {
-    max-width: 18em !important;
+    max-width: 12.31em !important;
 }
 
 .u-max-width-sm {
-    max-width: 39em !important;
+    max-width: 32em !important;
 }
 
 .u-max-width-md {
@@ -583,6 +728,13 @@ a:focus {
 
 .u-max-width-none {
     max-width: none !important;
+}
+
+
+@media(min-width: 768px) {
+    .u-max-width-xs-bp2 {
+        max-width: 12.31em !important;
+    }
 }
 
 /*
