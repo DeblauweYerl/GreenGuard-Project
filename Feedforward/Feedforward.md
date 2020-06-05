@@ -59,3 +59,19 @@ Dit is de feedback op mijn vragen.
 Hier komt de feedforward: wat ga ik concreet doen?
 - [ ] ToDo 1: Stijn mijn ERD eens laten zien.
 - [ ] ToDo 2: Mijn vragen stellen.
+
+
+## Gesprek 3 (Datum: 05/06/2020)
+Lector: Claudia
+
+Vragen voor dit gesprek:
+- [x] vraag 1: Tiles van variabelen centreren niet in de container. Oplossing?
+- [ ] vraag 2: Layout van rechter element in de irrigatie sectie is moeilijk na te bootsen uit het design.
+
+Dit is de feedback op mijn vragen. 
+- 1: Er zal later op teruggekomen worden.
+- 2: Er zal later op teruggekomen worden.
+
+Hier komt de feedforward: wat ga ik concreet doen?
+- [ ] ToDo 1: Claudia mijn website laten zien.
+- [ ] ToDo 2: Mijn vragen stellen.
