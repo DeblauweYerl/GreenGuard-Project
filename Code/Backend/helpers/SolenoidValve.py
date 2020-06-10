@@ -14,4 +14,4 @@ class SolenoidValve:
         GPIO.output(self.pin, 1)
         time.sleep(self.sleep)
         GPIO.output(self.pin, 0)
-        print("water applied!!!")
+        print("water applied")

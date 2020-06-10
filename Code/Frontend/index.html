@@ -9,11 +9,13 @@
         <meta name="msapplication-TileColor" content="#578C06">
         <meta name="theme-color" content="#578C06">
 
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#3385FF">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+        <link rel="manifest" href="img/favicons/site.webmanifest">
+        <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#578c06">
+        <meta name="msapplication-TileColor" content="#578c06">
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/screen.css">
@@ -40,37 +42,37 @@
             <div class="o-container">
                 <div class="c-data o-layout o-layout--gutter-sm o-layout--justify-center">
 
-                    <div class="o-layout__item u-1-of-2-bp3 u-mb-md js-temp">
-                        <div class="c-data__item u-max-width-sm js-temp-bg1">
+                    <div class="o-layout__item u-max-width-sm u-1-of-2-bp3 u-mb-md js-temp">
+                        <div class="c-data__item js-temp-bg1">
                             <div class="c-data__data js-temp-bg2">
-                                <div class="js-temp-data c-data__data-value c-lead--xl">202°C</div>
+                                <div class="c-data__data-value c-lead--xxl js-temp-data">...</div>
                             </div>
                             <div class="c-data__title c-lead--lg">temperatuur</div>
                         </div>
                     </div>
 
-                    <div class="o-layout__item u-1-of-2-bp3 u-mb-md js-hum">
-                        <div class="c-data__item u-max-width-sm">
+                    <div class="o-layout__item u-max-width-sm u-1-of-2-bp3 u-mb-md js-hum">
+                        <div class="c-data__item">
                             <div class="c-data__data">
-                                <div class="js-hum-data c-data__data-value c-lead--xl">202%</div>
+                                <div class="c-data__data-value c-lead--xxl js-hum-data">...</div>
                             </div>
                             <div class="c-data__title c-lead--lg">luchtvochtigheid</div>
                         </div>
                     </div>
 
-                    <div class="o-layout__item u-1-of-2-bp3 u-mb-md js-moist">
-                        <div class="c-data__item u-max-width-sm js-moist-bg1">
+                    <div class="o-layout__item u-max-width-sm u-1-of-2-bp3 u-mb-md js-moist">
+                        <div class="c-data__item js-moist-bg1">
                             <div class="c-data__data js-moist-bg2">
-                                <div class="js-moist-data c-data__data-value c-lead--xl">202%</div>
+                                <div class="c-data__data-value c-lead--xxl js-moist-data">...</div>
                             </div>
                             <div class="c-data__title c-lead--lg">grondvochtigheid</div>
                         </div>
                     </div>
 
-                    <div class="o-layout__item u-1-of-2-bp3 u-mb-md js-light">
-                        <div class="c-data__item u-max-width-sm">
+                    <div class="o-layout__item u-max-width-sm u-1-of-2-bp3 u-mb-md js-light">
+                        <div class="c-data__item">
                             <div class="c-data__data">
-                                <div class="js-light-data c-data__data-value c-lead--xl">202%</div>
+                                <div class="c-data__data-value c-lead--xxl js-light-data">...</div>
                             </div>
                             <div class="c-data__title c-lead--lg">licht</div>
                         </div>
@@ -78,18 +80,19 @@
                 </div>
             </div>
         </section>
-        <section class="c-water o-row o-row--sm o-row--neutral-xx-dark u-mb-xl">
+        <section class="c-water o-row o-row--thin o-row--sm o-row--neutral-xx-dark u-mb-xl">
             <div class="o-container">
+                <div class="c-lead--lg c-lead--align-center">water</div>
                 <div class="o-layout o-layout--justify-space-around o-layout--align-center">
-                    <div class="c-water__irrigation-mode o-layout o-layout__item o-layout--justify-center u-1-of-2 u-max-width-xxs">
-                        <div class="o-layout__item">irrigatie modus</div>
+                    <div class="c-lead--align-center o-layout o-layout__item o-layout--justify-center u-1-of-2 u-max-width-xxs">
+                        <div class="o-layout__item">modus</div>
                         <div class="c-button c-button--md c-button--bg-light o-layout__item js-irrigation-man u-mb-sm">manueel</div>
                         <div class="c-button c-button--md c-button--bg-light c-button--active o-layout__item js-irrigation-auto">automatisch</div>
                     </div>
-                    <div class="c-water-apply o-layout o-layout__item u-1-of-2 u-max-width-xxs u-max-width-xs-bp2">
-                        <div class="c-water-apply__last o-layout__item u-1-of-2-bp2 u-order-2-bp2">laatst toegediend: <span class="js-sol">...</span></div>
-                        <div class="c-water-apply__apply c-button c-button--bg-dark c-button--lg o-layout__item u-mb-sm u-order-1-bp2 js-apply-water">WATER TOEDIENEN</div>
-                        <div class="c-water-apply__details c-button o-layout__item u-1-of-2-bp2 u-order-3-bp2">bekijk details</div>
+                    <div class="c-water-apply o-layout o-layout__item u-1-of-2 u-max-width-xxs u-max-width-xs-bp2 u-mt-sm-bp2">
+                        <div class="c-water-apply__last c-lead--align-center c-lead--align-left-bp2 o-layout__item u-1-of-2-bp2 u-order-2-bp2">toegediend: <span class="js-sol-time">...</span></div>
+                        <div class="c-water-apply__apply c-button c-button--bg-dark c-button--lg-bp2 o-layout__item u-order-1-bp2 js-apply-water">WATER TOEDIENEN</div>
+                        <div class="c-water-apply__details c-button c-lead--align-left-bp2 c-lead--underline o-layout__item u-1-of-2-bp2 u-order-3-bp2 js-sol">bekijk historiek</div>
                     </div>
                 </div>
             </div>

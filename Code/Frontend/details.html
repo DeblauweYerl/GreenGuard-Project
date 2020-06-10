@@ -9,16 +9,19 @@
         <meta name="msapplication-TileColor" content="#578C06">
         <meta name="theme-color" content="#578C06">
 
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#3385FF">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+        <link rel="manifest" href="img/favicons/site.webmanifest">
+        <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#578c06">
+        <meta name="msapplication-TileColor" content="#578c06">
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/screen.css">
         <link rel="stylesheet" href="https://use.typekit.net/map4wmn.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+        <script src="node_modules/chart.js/dist/Chart.js"></script>
         <script src="script/details.js"></script>
     </head>
     <body>
@@ -35,11 +38,15 @@
                 </div>
             </div>
         </header>
-        <section class="o-row">
+        <section class="o-row o-row--thin o-row--lg">
             <div class="o-container">
-                <div class="o-layout o-layout--justify-center u-max-width-sm js-table">
-                    <div class="c-cell js-table-date">2020........</div>
-                    <div class="c-cell js-table-status">65%</div>
+                <div class="c-lead--xl c-lead--align-center c-lead--color-primary js-title"></div>
+                <canvas class="c-chart"id="Graph"></canvas>
+            </div>
+        </section>
+        <section class="o-row o-row--thin">
+            <div class="o-container u-max-width-sm">
+                <div class="o-layout o-layout--justify-center js-table">
                 </div>
             </div>
         </section>

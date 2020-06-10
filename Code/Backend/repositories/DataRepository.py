@@ -23,28 +23,54 @@ class DataRepository:
 
     @staticmethod
     def read_temperature():
-        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'TEMP'"
+        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'TEMP' ORDER BY DateTime DESC"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_humidity():
-        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'HUM'"
+        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'HUM' ORDER BY DateTime DESC"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_moisture():
-        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'MOIST'"
+        sql = "SELECT DateTime, Status, Warning FROM tblmeasurement WHERE ActionId = 'MOIST' ORDER BY DateTime DESC"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_light():
-        sql = "SELECT * FROM tblmeasurement WHERE ActionId = 'LIGHT'"
+        sql = "SELECT * FROM tblmeasurement WHERE ActionId = 'LIGHT' ORDER BY DateTime DESC"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_solenoid():
-        sql = "SELECT * FROM tblmeasurement WHERE ActionId LIKE 'SOL%'"
+        sql = "SELECT * FROM tblmeasurement WHERE ActionId LIKE 'SOL%' ORDER BY DateTime DESC"
         return Database.get_rows(sql)
+
+
+    @staticmethod
+    def read_latest_30_temperature():
+        sql = "SELECT M.Status, W.Message AS Warning FROM tblmeasurement M LEFT JOIN tblwarning W ON M.Warning = W.WarningId WHERE M.ActionId = 'TEMP' ORDER BY M.DateTime DESC LIMIT 30"
+        return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_30_humidity():
+        sql = "SELECT Status FROM tblmeasurement WHERE ActionId = 'HUM' ORDER BY DateTime DESC LIMIT 30"
+        return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_30_moisture():
+        sql = "SELECT M.Status, W.Message AS Warning FROM tblmeasurement M LEFT JOIN tblwarning W ON M.Warning = W.WarningId WHERE M.ActionId = 'MOIST' ORDER BY M.DateTime DESC LIMIT 30"
+        return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_30_light():
+        sql = "SELECT Status FROM tblmeasurement WHERE ActionId = 'LIGHT' ORDER BY DateTime DESC LIMIT 30"
+        return Database.get_one_row(sql)
+
+    @staticmethod
+    def read_latest_30_solenoid():
+        sql = "SELECT DateTime, Warning FROM tblmeasurement WHERE ActionId LIKE 'SOL%' ORDER BY DateTime DESC LIMIT 30"
+        return Database.get_one_row(sql)
 
 
     @staticmethod

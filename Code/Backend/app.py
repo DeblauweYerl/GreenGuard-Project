@@ -96,7 +96,7 @@ def read_sensors():
 
         check_warnings()
         
-        time.sleep(5)
+        time.sleep(120)
 
 def insert_sensordata():
     global temp, hum, moist, light
@@ -150,6 +150,7 @@ def hallo():
 def initial_connection():
     print('A new client connect')
     send_measurements(1)
+    socketio.emit('B2F_irrigation_mode', irrigation_mode)
 
 @socketio.on('F2B_request_measurements')
 def send_measurements(payload):
@@ -164,27 +165,47 @@ def send_measurements(payload):
 
 @socketio.on('F2B_request_data')
 def send_data(payload):
-    print(payload)[0]
-    if payload[0] == 'temp':
+    if payload == 'temperatuur':
         data = DataRepository.read_temperature()
-        data['DateTime'] = str(data['DateTime'])
-        print(data)
+        for i in data:
+            i['DateTime'] = str(i['DateTime'])
+        socketio.emit('B2F_read_data', data)
+    if payload == 'luchtvochtigheid':
+        data = DataRepository.read_humidity()
+        for i in data:
+            i['DateTime'] = str(i['DateTime'])
+        socketio.emit('B2F_read_data', data)
+    if payload == 'grondvochtigheid':
+        data = DataRepository.read_moisture()
+        for i in data:
+            i['DateTime'] = str(i['DateTime'])
+        socketio.emit('B2F_read_data', data)
+    if payload == 'licht':
+        data = DataRepository.read_light()
+        for i in data:
+            i['DateTime'] = str(i['DateTime'])
+        socketio.emit('B2F_read_data', data)
+    if payload == 'water':
+        data = DataRepository.read_solenoid()
+        for i in data:
+            i['DateTime'] = str(i['DateTime'])
         socketio.emit('B2F_read_data', data)
 
 
 @socketio.on('F2B_activate_solenoid')
 def activate_solenoid(data):
+    global irrigation_mode
     print('Solenoid activated')
-    res = DataRepository.insert_measurement('SOLM', 4, 1, None)
-    solenoid.apply_water()
-    res = DataRepository.insert_measurement('SOLM', 4, 0, None)
+    if irrigation_mode == "man":
+        res = DataRepository.insert_measurement('SOLM', 4, 1, None)
+        solenoid.apply_water()
+        res = DataRepository.insert_measurement('SOLM', 4, 0, None)
 
 @socketio.on('F2B_irrigation_mode')
 def switch_irrigation_mode(data):
     global irrigation_mode
     irrigation_mode = data
-    print(data)
-    print(irrigation_mode)
+    socketio.emit('B2F_irrigation_mode', irrigation_mode)
 
 
 if __name__ == '__main__':

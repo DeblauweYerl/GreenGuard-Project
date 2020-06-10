@@ -229,19 +229,9 @@ a:focus {
         padding-top: 48px;
         padding-bottom: 24px;
     }
-
-    .o-row--lg {
-        padding-top: 72px;
-        padding-bottom: 48px;
-    }
 }
 
 @media (min-width: 992px) {
-    /* .o-row--intro {
-        padding-top: 0;
-        padding-bottom: 0;
-    } */
-
     .o-row--xl {
         padding-top: 96px;
         padding-bottom: 72px;
@@ -475,22 +465,11 @@ a:focus {
     height: 64px;
 }
 
-
-/*
-    Components: data
-    ---
-    Components to style the data tiles.
-*/
-
-.c-lead--lg {
-    font-weight: 500;
-    font-size: 24px;
+.c-logo:hover {
+    cursor: pointer;
 }
 
-.c-lead--xl {
-    font-weight: 500;
-    font-size: 56px;
-}
+
 
 /*
     Components: data
@@ -510,6 +489,14 @@ a:focus {
     color: #FFF;
 }
 
+.c-data__item:hover {
+    cursor: pointer;
+}
+
+.c-data__item--lg {
+    height: 160px;
+}
+
 .c-data__data {
     position: absolute;
     border-radius: 16px;
@@ -519,12 +506,20 @@ a:focus {
     right: 0px;
 }
 
+.c-data__data--lg {
+    height: 120px;
+}
+
 .c-data__data-value {
     padding-top: 8px;
 }
 
 .c-data__title {
     padding-top: 96px;
+}
+
+.c-data__title--low {
+    padding-top: 120px;
 }
 
 .c-data > .c-data__item {
@@ -552,29 +547,38 @@ a:focus {
     border: 2px solid #FAFAFA;
     color: #FAFAFA;
     padding-left: 8px;
-    width: 176px;
 }
 
 
 /*
     Components: water
     ---
-    Components to style buttons.
+    Components to style water section.
 */
 
 .c-water {
-    height: 144px;
+    height: 180px;
     font-size: 16px;
-}
-
-.c-water__irrigation-mode {
-   text-align: center;
 }
 
 .c-water-apply {
     display: flex;
+    /* flex-wrap: wrap; */
+    height: 112px;
+    width: 156px;
 }
 
+@media(min-width: 768px) {
+    .c-water-apply {
+        flex-direction: column;
+        height: 88px;
+    }
+
+    .c-water-apply__apply {
+        flex: 0 1 94px;
+        width: 160px;
+    }
+}
 
 /*
     Components: button
@@ -594,7 +598,7 @@ a:focus {
     padding-top: 2px
 }
 
-.c-button--lg {
+.c-button--lg-bp2 {
     padding-top: 8px;
     border-radius: 16px;
     font-size: 16px;
@@ -619,10 +623,62 @@ a:focus {
     cursor: pointer;
 }
 
-@media(min-width: 768) {
-    .c-button--xl-bp2 {
+@media(min-width: 768px) {
+    .c-button--lg-bp2 {
+        padding-top: 32px;
         height: 88px;
     }
+}
+
+
+/*
+    Components: lead
+    ---
+    Components to style different forms of text.
+*/
+
+.c-lead--lg {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.c-lead--xl {
+    font-weight: 500;
+    font-size: 36px;
+}
+
+.c-lead--xxl {
+    font-weight: 500;
+    font-size: 56px;
+}
+
+.c-lead--align-center {
+    text-align: center;
+}
+
+.c-lead--underline {
+    text-decoration: underline;
+}
+
+.c-lead--color-primary {
+    color: #578C06;
+}
+
+@media(min-width: 768px) {
+    .c-lead--align-left-bp2 {
+        text-align: left;
+    }
+}
+
+/*
+    Components: graph
+    ---
+    Components to style the graph on the details page.
+*/
+
+.c-graph {
+    width: 800px;
+    height: 500px;
 }
 
 
@@ -700,6 +756,13 @@ a:focus {
     margin-bottom: 48px !important;
 }
 
+
+@media(min-width: 768px) {
+    .u-mt-sm-bp2 {
+        margin-top: 24px;
+    }
+}
+
 /*
     Utilities: max-width
     ---
@@ -733,7 +796,7 @@ a:focus {
 
 @media(min-width: 768px) {
     .u-max-width-xs-bp2 {
-        max-width: 12.31em !important;
+        max-width: 19em !important;
     }
 }
 
