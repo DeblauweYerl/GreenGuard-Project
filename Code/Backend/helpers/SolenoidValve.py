@@ -3,7 +3,7 @@ import time
 
 class SolenoidValve:
 
-    def __init__(self, pin, sleep=2):
+    def __init__(self, pin, sleep=5):
         self.pin = pin
         self.sleep = sleep
 

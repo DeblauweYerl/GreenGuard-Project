@@ -20,10 +20,10 @@ from RPi import GPIO
 dht = 18
 rs = 5
 e = 6
-sda = 21
-scl = 20
+sda = 16
+scl = 12
 
-solenoid = SolenoidValve(26)
+solenoid = SolenoidValve(19)
 moist_sensor = MCP3008()
 LDR = MCP3008(0,0,1)
 DHT_sensor = Adafruit_DHT.DHT11
@@ -37,7 +37,7 @@ water_applied = 0
 irrigation_mode = "auto"
 
 GPIO.setwarnings(False)
-# GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
 
 app = Flask(__name__)
@@ -100,21 +100,23 @@ def read_sensors():
 
 def insert_sensordata():
     global temp, hum, moist, light
-    if temp > 30 and light > 95:
-        res = DataRepository.insert_measurement('TEMP', 3, temp, 'HOT')
-    elif temp < 16 and light < 50:
-        res = DataRepository.insert_measurement('TEMP', 3, temp, 'COLD')
-    else:
-        res = DataRepository.insert_measurement('TEMP', 3, temp, None)
+    if moist != 0 and temp != 0:
+        if temp > 38 and light > 98:
+            res = DataRepository.insert_measurement('TEMP', 3, temp, 'HOT')
+        elif temp < 16 and light < 50:
+            res = DataRepository.insert_measurement('TEMP', 3, temp, 'COLD')
+        else:
+            res = DataRepository.insert_measurement('TEMP', 3, temp, None)
 
-    #humidity
+    # humidity
     res = DataRepository.insert_measurement('HUM', 3, hum, None)
 
     #moisture
-    if DataRepository.read_latest_moisture()['Status'] < 35 and water_applied == 1:
-        res = DataRepository.insert_measurement('MOIST', 2, moist, 'WATER')
-    else:
-        res = DataRepository.insert_measurement('MOIST', 2, moist, None)
+    if moist != 0 and temp != 0:
+        if DataRepository.read_latest_moisture()['Status'] < 35 and water_applied == 1:
+            res = DataRepository.insert_measurement('MOIST', 2, moist, 'WATER')
+        else:
+            res = DataRepository.insert_measurement('MOIST', 2, moist, None)
 
     res = DataRepository.insert_measurement('LIGHT', 1, light, None)
 
